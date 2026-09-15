@@ -4,7 +4,7 @@
   "name": "jankx/custom-price",
   "version": "1.0.0",
   "title": "Custom Price",
-  "category": "widgets",
+  "category": "jankx",
   "icon": "money",
   "description": "Display custom price field with specific style",
   "supports": {
