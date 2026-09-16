@@ -2,22 +2,30 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "jankx/custom-price",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Custom Price",
   "category": "jankx",
   "icon": "money",
-  "description": "Display custom price field with specific style",
+  "description": "Display price field compatible with Jankx E-commerce Product and Travel APIs",
   "supports": {
     "html": false,
     "color": {
-        "text": true,
-        "background": true
+      "text": true,
+      "background": true
     },
     "typography": {
-        "fontSize": true
+      "fontSize": true
     }
   },
+  "usesContext": [
+    "postId",
+    "postType"
+  ],
   "attributes": {
+    "priceSource": {
+      "type": "string",
+      "default": "auto"
+    },
     "metaKey": {
       "type": "string",
       "default": "_price"
@@ -34,22 +42,46 @@
       "type": "string",
       "default": ""
     },
+    "showRegularPriceWhenOnSale": {
+      "type": "boolean",
+      "default": true
+    },
+    "currencySource": {
+      "type": "string",
+      "default": "auto"
+    },
     "currencySymbol": {
-        "type": "string",
-        "default": "đ"
+      "type": "string",
+      "default": "đ"
+    },
+    "currencyPosition": {
+      "type": "string",
+      "default": "right"
+    },
+    "numberFormat": {
+      "type": "string",
+      "default": "vi-VN"
     },
     "emptyText": {
       "type": "string",
       "default": "Liên hệ"
     },
-    "numberFormat": {
+    "showWhenEmpty": {
+      "type": "boolean",
+      "default": true
+    },
+    "prefix": {
       "type": "string",
-      "default": "vi-VN"
+      "default": ""
+    },
+    "suffix": {
+      "type": "string",
+      "default": ""
     }
   },
   "textdomain": "jankx",
   "editorScript": "file:./build/index.js",
-  "editorStyle": "file:./build/editor.css",
-  "style": "file:./build/style.css",
+  "editorStyle": "file:./build/index.css",
+  "style": "file:./build/style-index.css",
   "render": "file:./render.php"
 }

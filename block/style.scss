@@ -3,11 +3,35 @@
     font-weight: 700;
     display: inline-flex;
     align-items: baseline;
-    
-    .price-amount {
-        margin-right: 4px;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .price-prefix,
+    .price-suffix {
+        font-weight: 400;
+        font-size: 0.9em;
+        opacity: 0.85;
     }
-    
+
+    .price-amount {
+        display: inline-flex;
+        align-items: baseline;
+    }
+
+    .jankx-price-sale {
+        color: #d63638;
+        font-weight: 700;
+    }
+
+    .jankx-price-regular,
+    .price-regular {
+        text-decoration: line-through;
+        color: #8c8f94;
+        font-weight: 400;
+        font-size: 0.85em;
+        margin-left: 4px;
+    }
+
     .currency-symbol {
         text-decoration: underline;
         font-size: 0.9em;
