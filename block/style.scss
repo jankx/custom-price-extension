@@ -37,3 +37,21 @@
         font-size: 0.9em;
     }
 }
+
+/*
+ * When a text color is selected via Gutenberg color support, apply it to all
+ * price elements instead of the semantic default colors above.
+ */
+.wp-block-jankx-custom-price {
+    &.has-text-color,
+    &.has-inline-color {
+        .jankx-price-sale,
+        .jankx-price-regular,
+        .price-regular,
+        .jankx-price-single,
+        .jankx-price-range,
+        .price-amount {
+            color: inherit;
+        }
+    }
+}
