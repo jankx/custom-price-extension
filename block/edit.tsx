@@ -20,7 +20,7 @@ export default function Edit({ attributes, setAttributes }) {
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: 'jankx-custom-price-block'
+        className: 'jankx-custom-price'
     });
 
     const priceSourceOptions = [
@@ -208,18 +208,16 @@ export default function Edit({ attributes, setAttributes }) {
                 </PanelBody>
             </InspectorControls>
 
-            <div className="jankx-custom-price">
-                {prefix ? <span className="price-prefix">{prefix}</span> : null}
-                {showSalePreview ? (
-                    <>
-                        <span className="price-amount jankx-price-sale">{previewPrice}</span>
-                        <del className="price-regular jankx-price-regular">{previewRegular}</del>
-                    </>
-                ) : (
-                    <span className="price-amount jankx-price-single">{previewPrice || emptyText}</span>
-                )}
-                {suffix ? <span className="price-suffix">{suffix}</span> : null}
-            </div>
+            {prefix ? <span className="price-prefix">{prefix}</span> : null}
+            {showSalePreview ? (
+                <>
+                    <span className="price-amount jankx-price-sale">{previewPrice}</span>
+                    <del className="price-regular jankx-price-regular">{previewRegular}</del>
+                </>
+            ) : (
+                <span className="price-amount jankx-price-single">{previewPrice || emptyText}</span>
+            )}
+            {suffix ? <span className="price-suffix">{suffix}</span> : null}
         </div>
     );
 }

@@ -9,13 +9,31 @@
   "description": "Display price field compatible with Jankx E-commerce Product and Travel APIs",
   "supports": {
     "html": false,
+    "align": true,
     "color": {
       "text": true,
-      "background": true
+      "background": true,
+      "gradients": true
     },
     "typography": {
-      "fontSize": true
-    }
+      "fontSize": true,
+      "fontFamily": true,
+      "fontWeight": true,
+      "lineHeight": true,
+      "textAlign": true,
+      "textTransform": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "shadow": true
   },
   "usesContext": [
     "postId",
