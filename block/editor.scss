@@ -1,3 +1,42 @@
-.jankx-custom-price-block {
-    // Editor specific styles
+/**
+ * Custom Price Block — Editor-only styles
+ *
+ * Gutenberg adds `has-text-color` + inline `color: var(--wp--preset--color--*)` on
+ * the wrapper when the user picks a text color via the Inspector Controls color picker.
+ * The child spans (.jankx-price-sale etc.) have hardcoded colors in style.scss that
+ * win on specificity over `color: inherit`. We boost the override here in editor
+ * context so the chosen color visually propagates to all price spans.
+ */
+
+// In the editor Gutenberg wraps the block with `.wp-block` and adds `has-text-color`.
+// Using the same selectors as style.scss but with a higher-specificity editor context.
+.editor-styles-wrapper {
+    .wp-block-jankx-custom-price {
+        &.has-text-color,
+        &.has-inline-color {
+            .jankx-price-sale,
+            .jankx-price-single,
+            .jankx-price-range,
+            .jankx-price-regular,
+            .price-regular,
+            .price-amount {
+                color: inherit !important;
+            }
+        }
+    }
+}
+
+// Fallback: target without editor wrapper (some Gutenberg versions omit it)
+.wp-block-jankx-custom-price {
+    &.has-text-color,
+    &.has-inline-color {
+        .jankx-price-sale,
+        .jankx-price-single,
+        .jankx-price-range,
+        .jankx-price-regular,
+        .price-regular,
+        .price-amount {
+            color: inherit !important;
+        }
+    }
 }
