@@ -36,7 +36,6 @@ export default function Edit({ attributes, setAttributes }) {
         { label: __('Product Price (_product_price)', 'jankx'), value: '_product_price' },
         { label: __('Product Regular Price (_product_regular_price)', 'jankx'), value: '_product_regular_price' },
         { label: __('Product Sale Price (_product_sale_price)', 'jankx'), value: '_product_sale_price' },
-        { label: __('Tour Starting Price (_experience_starting_price)', 'jankx'), value: '_experience_starting_price' },
         { label: __('Tour Price (_tour_price)', 'jankx'), value: '_tour_price' },
         { label: __('Service Price (_service_price)', 'jankx'), value: '_service_price' },
         { label: __('Regular Price (_regular_price)', 'jankx'), value: '_regular_price' },

@@ -100,9 +100,8 @@ class CustomPriceResolver
         if ($postId > 0) {
             // Check stored currency for multi-currency conversion
             $currencyMeta = get_post_meta($postId, '_price_currency', true)
-                ?: (get_post_meta($postId, '_experience_currency', true)
                 ?: (get_post_meta($postId, '_tour_price_currency', true)
-                ?: get_post_meta($postId, '_product_currency', true)));
+                ?: get_post_meta($postId, '_product_currency', true));
             if (!empty($currencyMeta)) {
                 $sourceCurrency = strtoupper(trim((string) $currencyMeta));
             }
@@ -137,12 +136,6 @@ class CustomPriceResolver
                     $activePrice = (float) $product->getPrice();
 
                     if ($postType === 'tour') {
-                        if ($activePrice <= 0) {
-                            $startingPrice = get_post_meta($postId, '_experience_starting_price', true);
-                            if ($startingPrice !== '') {
-                                $activePrice = (float) $startingPrice;
-                            }
-                        }
                         $activePrice = (float) apply_filters('jankx/travel/tour/starting_price', $activePrice, $postId);
                     }
 
@@ -192,10 +185,9 @@ class CustomPriceResolver
                         // Jankx travel extension
                         $regularPrice = (float) get_post_meta($postId, '_tour_regular_price', true);
                         $salePrice = (float) get_post_meta($postId, '_tour_sale_price', true);
-                        $startingPrice = get_post_meta($postId, '_experience_starting_price', true);
                         $tourPrice = get_post_meta($postId, '_tour_price', true);
 
-                        $rawTour = !empty($startingPrice) ? (float) $startingPrice : (float) $tourPrice;
+                        $rawTour = (float) $tourPrice;
                         $rawTour = (float) apply_filters('jankx/travel/tour/starting_price', $rawTour, $postId);
 
                         if ($salePrice > 0 && $regularPrice > 0 && $salePrice < $regularPrice) {
