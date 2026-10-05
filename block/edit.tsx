@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, TextControl, ToggleControl } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
@@ -186,18 +186,8 @@ export default function Edit({ attributes, setAttributes }) {
                 </PanelBody>
 
                 <PanelBody title={__('Labels & Display', 'jankx')} initialOpen={false}>
-                    <TextControl
-                        label={__('Prefix Text', 'jankx')}
-                        value={prefix || ''}
-                        placeholder={__('e.g. Từ ', 'jankx')}
-                        onChange={(value) => setAttributes({ prefix: value })}
-                    />
-                    <TextControl
-                        label={__('Suffix Text', 'jankx')}
-                        value={suffix || ''}
-                        placeholder={__('e.g. / người', 'jankx')}
-                        onChange={(value) => setAttributes({ suffix: value })}
-                    />
+                    
+                    
                     <TextControl
                         label={__('Empty Price Text', 'jankx')}
                         value={emptyText}
@@ -207,16 +197,14 @@ export default function Edit({ attributes, setAttributes }) {
                 </PanelBody>
             </InspectorControls>
 
-            {prefix ? <span className="price-prefix">{prefix}</span> : null}
-            {showSalePreview ? (
-                <>
-                    <span className="price-amount jankx-price-sale">{previewPrice}</span>
-                    <del className="price-regular jankx-price-regular">{previewRegular}</del>
-                </>
-            ) : (
-                <span className="price-amount jankx-price-single">{previewPrice || emptyText}</span>
-            )}
-            {suffix ? <span className="price-suffix">{suffix}</span> : null}
+            <InnerBlocks
+                allowedBlocks={['core/paragraph', 'jankx/custom-price-value', 'core/heading', 'core/group']}
+                template={[
+                    ['core/paragraph', { placeholder: __('Từ', 'jankx'), className: 'price-prefix' }],
+                    ['jankx/custom-price-value', {}],
+                    ['core/paragraph', { placeholder: __('/ người', 'jankx'), className: 'price-suffix' }]
+                ]}
+            />
         </div>
     );
 }

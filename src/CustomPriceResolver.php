@@ -416,26 +416,45 @@ class CustomPriceResolver
         ]);
 
         ob_start();
+        if ($isEmpty) {
+            ?>
+            <span class="price-amount price-empty"><?php echo $formattedPrice; ?></span>
+            <?php
+        } elseif ($isDualSaleDisplay) {
+            ?>
+            <span class="price-amount jankx-price-sale"><?php echo $formattedSalePrice ?: $formattedPrice; ?></span>
+            <del class="price-regular jankx-price-regular"><?php echo $formattedRegularPrice; ?></del>
+            <?php
+        } elseif ($isRange && !empty($formattedMaxPrice)) {
+            ?>
+            <span class="price-amount jankx-price-range"><?php echo $formattedPrice . ' - ' . $formattedMaxPrice; ?></span>
+            <?php
+        } else {
+            ?>
+            <span class="price-amount jankx-price-single"><?php echo $formattedPrice; ?></span>
+            <?php
+        }
+        $innerPriceHtml = ob_get_clean();
+
+        ob_start();
         ?>
         <div <?php echo $wrapperAttrs; ?>>
-            <?php if (!empty($prefix)): ?>
-                <span class="price-prefix"><?php echo esc_html($prefix); ?></span>
-            <?php endif; ?>
+            <?php
+            if (!empty(trim($content))) {
+                $content = preg_replace('/<div[^>]*class="[^"]*jankx-price-value-placeholder[^"]*"[^>]*>.*?<\/div>/is', $innerPriceHtml, $content);
+                echo $content;
+            } else {
+                if (!empty($prefix)): ?>
+                    <span class="price-prefix"><?php echo esc_html($prefix); ?></span>
+                <?php endif; ?>
 
-            <?php if ($isEmpty): ?>
-                <span class="price-amount price-empty"><?php echo $formattedPrice; ?></span>
-            <?php elseif ($isDualSaleDisplay): ?>
-                <span class="price-amount jankx-price-sale"><?php echo $formattedSalePrice ?: $formattedPrice; ?></span>
-                <del class="price-regular jankx-price-regular"><?php echo $formattedRegularPrice; ?></del>
-            <?php elseif ($isRange && !empty($formattedMaxPrice)): ?>
-                <span class="price-amount jankx-price-range"><?php echo $formattedPrice . ' - ' . $formattedMaxPrice; ?></span>
-            <?php else: ?>
-                <span class="price-amount jankx-price-single"><?php echo $formattedPrice; ?></span>
-            <?php endif; ?>
+                <?php echo $innerPriceHtml; ?>
 
-            <?php if (!empty($suffix)): ?>
-                <span class="price-suffix"><?php echo esc_html($suffix); ?></span>
-            <?php endif; ?>
+                <?php if (!empty($suffix)): ?>
+                    <span class="price-suffix"><?php echo esc_html($suffix); ?></span>
+                <?php endif; 
+            }
+            ?>
         </div>
         <?php
         $html = ob_get_clean();
